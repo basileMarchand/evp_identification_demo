@@ -11,10 +11,10 @@ from evpsim.simulator import SimuLoad, MaterialSimulator, LocalFrame
 
 
 def model_theta(x, local):
-    C, D, C1, R0 = x.ravel()
+    C, D, C1, H, R0 = x.ravel()
     criterion = MisesCriterion()
     flow = NortonFlow(600., 3.)
-    iso = LinearIsotropicHardening(0.)
+    iso = LinearIsotropicHardening(H)
     kin1 = NonLinearKinematicHardening(C, D, 0)
     kin2 = LinearKinematicHardening(C1, 1)
     pot = PotentialEVP(R0, criterion, flow, iso, [kin1, kin2], name="ep")
@@ -60,8 +60,8 @@ def model_90(x):
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
-    time0, stress0 = model_0(np.array([5_000, 1_500., 5_000., 600.]))
-    time1, stress1 = model_0(np.array([500_000, 1_500., 50_000., 1_400.]))
+    time0, stress0 = model_0(np.array([5_000, 1_500., 5_000., 0., 600.]))
+    time1, stress1 = model_0(np.array([500_000, 1_500., 50_000., 3000., 1_400.]))
     plt.plot(time0, stress0, label="test 1")
     plt.plot(time1, stress1, label="test 2")
     plt.show()

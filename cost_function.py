@@ -37,9 +37,9 @@ if __name__ == "__main__":
     time45, stress_45_exp = load_stress("data_exp_45.json")
     time90, stress_90_exp = load_stress("data_exp_90.json")
 
-    out1 = cost_function(np.array([5_000, 1_500., 5_000., 600.]), ((
+    out1 = cost_function(np.array([5_000, 1_500., 5_000., 0., 600.]), ((
         time0, stress_0_exp), (time45, stress_45_exp), (time90, stress_90_exp)), w=(1./3., 1./3., 1./3.))
-    out2 = cost_function(np.array([395_000, 1_000., 22_000., 600.]), ((
+    out2 = cost_function(np.array([395_000, 1_000., 22_000., 1000., 600.]), ((
         time0, stress_0_exp), (time45, stress_45_exp), (time90, stress_90_exp)), w=(1./3., 1./3., 1./3.))
 
     import matplotlib.pyplot as plt
